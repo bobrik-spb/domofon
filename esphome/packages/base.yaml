@@ -1,1 +1,79 @@
+esphome:
+  name: $mdns_name
+  build_path: $build_path
+  platform: ESP8266
+  board: $board
+  comment: "espdomofon.ru"
+  esp8266_restore_from_flash: true
+  project:
+    name: "espdomofon.ru"
+    version: "1.6.2"
+  platformio_options:
+    build_flags: -DBEARSSL_SSL_BASIC -DMMU_IRAM_SIZE=0xC000 -DMMU_ICACHE_SIZE=0x4000 -DMMU_IRAM_HEAP
+  on_boot:
+    priority: 600
+    then:
+      - script.execute: state_ready
+      - light.turn_on:
+          id: rgb_led
+          effect: "Domofon"
 
+wifi:
+  ssid: $wifi_ssid
+  password: $wifi_password
+  fast_connect: on
+  ap:
+    ssid: $ap_ssid
+    password: $ap_password
+
+logger:
+  baud_rate: 0
+  logs:
+    light: INFO
+
+globals:
+  - id: mode_auto_open
+    type: bool
+    restore_value: yes
+    initial_value: 'false'
+  - id: mode_auto_open_once
+    type: bool
+    restore_value: yes
+    initial_value: 'false'
+  - id: mode_auto_reject
+    type: bool
+    restore_value: yes
+    initial_value: 'false'
+  - id: mode_mute
+    type: bool
+    restore_value: yes
+    initial_value: 'false'
+  - id: mode_mute_once
+    type: bool
+    restore_value: yes
+    initial_value: 'false'
+
+substitutions:
+  # Ge1mer board
+  board: esp12e
+  pin_relay_answer: GPIO14    # 330 Ohm, NO relay
+  pin_relay_phone: GPIO16     # Intercom, NC relay
+  pin_relay_mute: GPIO12      # 50 Ohm, NO relay
+  pin_led_red: GPIO5
+  pin_led_green: GPIO4
+  pin_led_blue: GPIO15
+  led_red_inverted: 'false'
+  led_green_inverted: 'false'
+  led_blue_inverted: 'false'
+  pin_call_detect: GPIO13
+  pin_btn_accept: GPIO0
+
+packages:
+  number: !include number.yaml
+  script: !include script.yaml
+  output: !include output.yaml
+  switch: !include switch.yaml
+  button: !include button.yaml
+  light: !include light.yaml
+  sensor: !include sensor.yaml
+  binary_sensor: !include binary_sensor.yaml
