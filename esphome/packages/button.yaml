@@ -1,0 +1,36 @@
+button:
+  - platform: restart
+    name: "${board_name} Restart"
+    entity_category: diagnostic
+
+  - platform: safe_mode
+    name: "${board_name} Safe Mode Restart"
+    entity_category: diagnostic
+
+  # Accept call
+  - platform: template
+    name: "${board_name} accept call"
+    icon: "mdi:door-open"
+    on_press:
+      then:
+        lambda: |-
+          if (id(incoming_call).state) {
+            id(last_action).publish_state("open_sw");
+            id(call_accept).execute();
+          } else {
+            ESP_LOGD("main", "No incoming call");
+          }
+
+  # Reject call
+  - platform: template
+    name: "${board_name} reject call"
+    icon: "mdi:door-closed-lock"
+    on_press:
+      then:
+        lambda: |-
+          if (id(incoming_call).state) {
+            id(last_action).publish_state("reject_sw");
+            id(call_reject).execute();
+          } else {
+            ESP_LOGD("main", "No incoming call");
+          }
