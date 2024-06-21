@@ -35,9 +35,9 @@ substitutions:
 ########### End user configuration ###########
 
 packages:
-  base: github://Anonym-tsk/smart-domofon/ge1mer/esphome/packages/base.yaml@master
-  api: github://Anonym-tsk/smart-domofon/ge1mer/esphome/packages/api.yaml@master
-  #mqtt: github://Anonym-tsk/smart-domofon/ge1mer/esphome/packages/mqtt.yaml@master
-  #web_server: github://Anonym-tsk/smart-domofon/ge1mer/esphome/packages/web_server.yaml@master
-  captive_portal: github://Anonym-tsk/smart-domofon/ge1mer/esphome/packages/captive_portal.yaml@master
+  base: github://bobrik-spb/domofon/esphome/packages/base.yaml@main
+  api: github://bobrik-spb/domofon/esphome/packages/api.yaml@main
+  #mqtt: github://bobrik-spb/domofon/esphome/packages/mqtt.yaml@main
+  #web_server: ggithub://bobrik-spb/domofon/esphome/packages/web_server.yaml@master
+  captive_portal: github://bobrik-spb/domofon/esphome/packages/captive_portal.yaml@main
 
