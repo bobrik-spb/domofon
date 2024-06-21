@@ -27,7 +27,7 @@ substitutions:
   # OTA
   ota:
   - platform: esphome
-    password: "esphome"
+    password: esphome
 
   # Software configuration
   call_start_detect_delay: 50ms     # Wait a while before going into a ring state
